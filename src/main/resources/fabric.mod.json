@@ -4,11 +4,22 @@
     "version"       : "0.1.0",
     "name"          : "DivideByToaster's Stack Size Mod",
     "description"   : "Certain vanilla items have increased stack size, such as soup!",
-    "authors"       : ["DivideByToaster"],
-    "contact"       : {},
-    "license"       : "MIT",
     "icon"          : "icon.png",
-    "environment"   : "*",
+
+    "contact":
+    {
+        "email"    : "dividebytoaster@protonmail.com",
+        "homepage" : "https://github.com/DivideByToaster/Toasters-Stack-Size-Mod",
+        "sources"  : "https://github.com/DivideByToaster/Toasters-Stack-Size-Mod",
+        "issues"   : "https://github.com/DivideByToaster/Toasters-Stack-Size-Mod/issues"
+    },
+    "authors":
+    [
+        "DivideByToaster"
+    ],
+    "license" : "MIT",
+
+    "environment": "*",
     "entrypoints":
     {
         "fabric-datagen" : ["net.dividebytoaster.ToastersStackSizeMod.client.ModDataGenerator"],
