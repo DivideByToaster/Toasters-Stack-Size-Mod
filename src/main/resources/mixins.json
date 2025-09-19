@@ -1,0 +1,29 @@
+{
+    "required"           : true,
+    "minVersion"         : "0.1.0",
+    "package"            : "net.dividebytoaster.ToastersStackSizeMod.mixins",
+    "compatibilityLevel" : "JAVA_21",
+    "mixins":
+    [
+        "ItemMixin"
+
+        , "EggItemMixin"
+        , "HangingSignItemMixin"
+        , "SignItemMixin"
+
+        , "BedItemMixin"
+        , "BoatItemMixin"
+        , "MinecartItemMixin"
+
+        , "InventoryMixIn"
+        , "ItemStackMixIn"
+    ],
+    "injectors":
+    {
+        "defaultRequire" : 1
+    },
+    "overwrites":
+    {
+        "requireAnnotations" : true
+    }
+}

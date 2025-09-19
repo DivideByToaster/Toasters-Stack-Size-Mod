@@ -1,0 +1,29 @@
+{
+    "schemaVersion" : 1,
+    "id"            : "toasters-stack-size-mod",
+    "version"       : "0.1.0",
+    "name"          : "DivideByToaster's Stack Size Mod",
+    "description"   : "Certain vanilla items have increased stack size, such as soup!",
+    "authors"       : ["DivideByToaster"],
+    "contact"       : {},
+    "license"       : "MIT",
+    "icon"          : "icon.png",
+    "environment"   : "*",
+    "entrypoints":
+    {
+        "fabric-datagen" : ["net.dividebytoaster.ToastersStackSizeMod.client.ModDataGenerator"],
+        "client"         : ["net.dividebytoaster.ToastersStackSizeMod.client.ModClient"],
+        "modmenu"        : ["net.dividebytoaster.ToastersStackSizeMod.client.ModMenu"],
+        "main"           : ["net.dividebytoaster.ToastersStackSizeMod.ModMain"]
+    },
+    "mixins":
+    [
+        "mixins.json"
+    ],
+    "depends":
+    {
+        "fabricloader" : ">=${fabric_loader_version}",
+        "fabric"       : "*",
+        "minecraft"    : ">=${minecraft_version}"
+    }
+}
