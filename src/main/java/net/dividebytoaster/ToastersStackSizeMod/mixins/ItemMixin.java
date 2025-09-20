@@ -239,10 +239,10 @@ public abstract class ItemMixin
                     (
                         // Horse Armor
                         translationKey.matches("^item\\.minecraft\\.[a-zA-Z0-9_]+_horse_armor$")
-                            // Banner Patterns
-                            || translationKey.matches("^item\\.minecraft\\.[a-zA-Z0-9_]+_banner_pattern$")
-                            // Music Discs
-                            || translationKey.matches("^item\\.minecraft\\.music_disc_[a-zA-Z0-9_]+$")
+                        // Banner Patterns
+                        || translationKey.matches("^item\\.minecraft\\.[a-zA-Z0-9_]+_banner_pattern$")
+                        // Music Discs
+                        || translationKey.matches("^item\\.minecraft\\.music_disc_[a-zA-Z0-9_]+$")
                     )
                     {
                         new_max_count = 4;
