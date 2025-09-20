@@ -29,7 +29,7 @@ extends Screen
 
     public ModMenuScreen(Screen parent)
     {
-        super(Text.of("Waa"));
+        super(Text.of("Stack Size Options"));
         this.parent = parent;
         settingsCache = new Cache();
     }
@@ -45,7 +45,7 @@ extends Screen
 
     private void titleLabel_init()
     {
-        titleLabel = new TextWidget(Text.literal("Stack Size Options"), CLIENT.textRenderer);
+        titleLabel = new TextWidget(title, CLIENT.textRenderer);
 
         int width = titleLabel.getWidth();
         titleLabel.setPosition((this.width - width) / 2, 12);

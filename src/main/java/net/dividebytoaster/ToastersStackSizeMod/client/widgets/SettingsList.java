@@ -355,7 +355,7 @@ extends ScrollBar
     @Override
     protected void appendClickableNarrations(NarrationMessageBuilder builder)
     {
-        // (TODO)
+        // TODO
     }
 
 /**********************************************************************************************************************\
