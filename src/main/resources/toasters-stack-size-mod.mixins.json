@@ -17,6 +17,8 @@
 
         , "InventoryMixIn"
         , "ItemStackMixIn"
+
+        , "FurnaceFuelSlotMixin"
     ],
     "injectors":
     {
