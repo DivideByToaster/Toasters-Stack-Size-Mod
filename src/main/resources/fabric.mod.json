@@ -24,7 +24,6 @@
     {
         "fabric-datagen" : ["net.dividebytoaster.ToastersStackSizeMod.client.ModDataGenerator"],
         "client"         : ["net.dividebytoaster.ToastersStackSizeMod.client.ModClient"],
-        "modmenu"        : ["net.dividebytoaster.ToastersStackSizeMod.client.ModMenu"],
         "main"           : ["net.dividebytoaster.ToastersStackSizeMod.ModMain"]
     },
     "mixins":
