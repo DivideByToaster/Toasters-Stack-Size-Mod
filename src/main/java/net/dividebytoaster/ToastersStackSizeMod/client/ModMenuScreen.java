@@ -56,7 +56,7 @@ extends Screen
     private void iconLabel_init()
     {
         iconLabel = new TextWidget(Text.literal("Relaunch the game to apply changes."), CLIENT.textRenderer);
-        iconLabel.setTextColor(0xFFFFFF00);
+        // iconLabel.setTextColor(0xFFFFFF00);
 
         int x = (width - iconLabel.getWidth()) / 2;
         int y = (titleLabel.getY() + titleLabel.getHeight() + 10 + SettingsList.ADD_HEIGHT) + 1

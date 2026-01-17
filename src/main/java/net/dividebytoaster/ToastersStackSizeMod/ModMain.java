@@ -1,8 +1,7 @@
 package net.dividebytoaster.ToastersStackSizeMod;
 
 /// Imports - Java
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.lang.reflect.Field;
 import java.nio.file.Path;
 import java.util.HashMap;
@@ -13,9 +12,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /// Imports - JSON
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.type.MapType;
-import com.fasterxml.jackson.databind.type.TypeFactory;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
 
 /// Imports - Minecraft
 import net.minecraft.item.Item;
@@ -80,6 +78,27 @@ implements net.fabricmc.api.ModInitializer
         return config_dir.resolve("stack-size.json").toFile();
     }
 
+    private static HashMap<String, Integer> readConfig(File configFile)
+    throws IOException
+    {
+        HashMap<String, Integer> config = new HashMap<>();
+        JsonReader configReader = new JsonReader(new FileReader(configFile));
+        configReader.beginObject();
+        while (configReader.hasNext())
+            config.put(configReader.nextName(), configReader.nextInt());
+        return config;
+    }
+
+    private static void writeConfig(File configFile, Map<String, Integer> config)
+    throws IOException
+    {
+        JsonWriter configWriter = new JsonWriter(new FileWriter(configFile));
+        configWriter.beginObject();
+        for (String key : config.keySet())
+            configWriter.name(key).value(config.get(key));
+        configWriter.endObject();
+    }
+
     @Unique
     private static HashMap<String, Integer> initConfig()
     {
@@ -92,20 +111,18 @@ implements net.fabricmc.api.ModInitializer
         {
             created = configFile.createNewFile();
 
-            ObjectMapper mapper = new ObjectMapper();
             if (created)
             {
                 config.put(CONFIG_MAX_KEY, CONFIG_MAX_DEFAULT);
-                mapper.writeValue(configFile, config);
+                writeConfig(configFile, config);
             }
             else
             {
-                MapType type = TypeFactory.defaultInstance().constructMapType(HashMap.class, String.class, Integer.class);
-                config = mapper.readValue(configFile, type);
+                config = readConfig(configFile);
                 if (!config.containsKey(CONFIG_MAX_KEY))
                 {
                     config.put(CONFIG_MAX_KEY, CONFIG_MAX_DEFAULT);
-                    mapper.writeValue(configFile, config);
+                    writeConfig(configFile, config);
                 }
             }
             CONFIG_ERROR = false;
@@ -159,8 +176,7 @@ implements net.fabricmc.api.ModInitializer
         File configFile = getConfigFile();
         try
         {
-            ObjectMapper mapper = new ObjectMapper();
-            mapper.writeValue(configFile, config);
+            writeConfig(configFile, config);
         }
         catch (IOException e)
         {

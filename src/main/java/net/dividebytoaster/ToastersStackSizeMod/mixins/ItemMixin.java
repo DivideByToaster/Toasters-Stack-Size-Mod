@@ -239,6 +239,9 @@ public abstract class ItemMixin
                     (
                         // Horse Armor
                         translationKey.matches("^item\\.minecraft\\.[a-zA-Z0-9_]+_horse_armor$")
+                        // Nautilus Armor
+                        ||
+                        translationKey.matches("^item\\.minecraft\\.[a-zA-Z0-9_]+_nautilus_armor$")
                         // Banner Patterns
                         || translationKey.matches("^item\\.minecraft\\.[a-zA-Z0-9_]+_banner_pattern$")
                         // Music Discs

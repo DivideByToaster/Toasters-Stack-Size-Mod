@@ -7,10 +7,12 @@ import java.util.Arrays;
 import java.util.function.Consumer;
 
 /// Imports - Minecraft
+import net.minecraft.client.gl.RenderPipelines;
+import net.minecraft.client.gui.Click;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.narration.NarrationMessageBuilder;
 import net.minecraft.client.gui.widget.*;
-import net.minecraft.client.render.RenderLayer;
+import net.minecraft.client.input.KeyInput;
 import static net.minecraft.component.DataComponentTypes.DAMAGE;
 import net.minecraft.text.Text;
 
@@ -239,7 +241,7 @@ extends ScrollBar
     }
 
     @Override
-    public void onClick(double mouseX, double mouseY)
+    public void onClick(Click click, boolean doubled)
     {
         // Scroll selection's min and max screen X-positions
         int x1 = getX();
@@ -250,11 +252,11 @@ extends ScrollBar
         int y2 = y1 + adjustedHeight();
 
         // Call with the calculated parameters
-        onClick(mouseX, mouseY, x1, x2, y1, y2);
+        onClick(click.x(), click.y(), x1, x2, y1, y2);
     }
 
     @Override
-    public boolean mouseDragged(double mouseX, double mouseY, int button, double deltaX, double deltaY)
+    public boolean mouseDragged(Click click, double deltaX, double deltaY)
     {
         Boolean scrollbarDragged;
         try
@@ -273,11 +275,11 @@ extends ScrollBar
         {
             int h = adjustedHeight();
             int y = getY() + ROW_OFFSET;
-            if (mouseY < y)
+            if (click.y() < y)
             {
                 setScrollY(0);
             }
-            else if (mouseY > y + h)
+            else if (click.y() > y + h)
             {
                 setScrollY(getMaxScrollY());
             }
@@ -288,16 +290,16 @@ extends ScrollBar
             }
             return true;
         }
-        if (isValidClickButton(button))
+        if (isValidClickButton(click.buttonInfo()))
         {
-            onDrag(mouseX, mouseY, deltaX, deltaY);
+            onDrag(click, deltaX, deltaY);
             return true;
         }
         return false;
     }
 
     @Override
-    protected void drawScrollbar(DrawContext context)
+    protected void drawScrollbar(DrawContext context, int mouseX, int mouseY)
     {
         if (overflows())
         {
@@ -307,7 +309,7 @@ extends ScrollBar
             int height = getScrollbarThumbHeight();
             context.drawGuiTexture
             (
-                RenderLayer::getGuiTextured,
+                RenderPipelines.GUI_TEXTURED,
                 Identifier.ofVanilla("widget/scroller_background"),
                 x,
                 getY() + ROW_OFFSET,
@@ -316,7 +318,7 @@ extends ScrollBar
             );
             context.drawGuiTexture
             (
-                RenderLayer::getGuiTextured,
+                RenderPipelines.GUI_TEXTURED,
                 Identifier.ofVanilla("widget/scroller"),
                 x,
                 y,
@@ -349,7 +351,7 @@ extends ScrollBar
             context.fill(x1, y3, x2, y4, COLOR_DARKEN);
             renderRows(context, mouseX, mouseY, deltaTicks);
         }
-        drawScrollbar(context);
+        drawScrollbar(context, mouseX, mouseY);
     }
 
     @Override
@@ -554,17 +556,21 @@ extends ScrollBar
             }
 
             @Override
-            public boolean keyPressed(int keyCode, int scanCode, int modifiers)
+            public boolean keyPressed(KeyInput input)
             {
-                if (active && isFocused() && keyCode == 257) // [Enter]
+                if (active && isFocused() && input.scancode() == 257) // [Enter]
                 {
                     if (parent.buttonInvalid()) return false;
                     playClickSound(CLIENT.getSoundManager());
-                    parent.button.onPress();
+                    parent.button.onPress(input);
                     return true;
                 }
-                return super.keyPressed(keyCode, scanCode, modifiers);
+                return super.keyPressed(input);
             }
+
+            @Override
+            public void onClick(Click click, boolean doubled)
+            {}
         }
     }
 }

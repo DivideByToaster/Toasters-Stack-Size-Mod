@@ -4,6 +4,7 @@ package net.dividebytoaster.ToastersStackSizeMod.client.widgets;
 import java.lang.reflect.Field;
 
 /// Imports - Minecraft
+import net.minecraft.client.gui.Click;
 import net.minecraft.client.gui.widget.ScrollableWidget;
 import net.minecraft.text.Text;
 
@@ -56,7 +57,7 @@ extends ScrollableWidget
     }
 
     @Override
-    public void onClick(double mouseX, double mouseY)
+    public void onClick(Click click, boolean doubled)
     {
         // Scroll selection's min and max screen X-positions
         int x2 = getX() + width;
@@ -67,7 +68,7 @@ extends ScrollableWidget
         int y2 = y1 + height;
 
         // Call with the calculated parameters
-        onClick(mouseX, mouseY, x1, x2, y1, y2);
+        onClick(click.x(), click.y(), x1, x2, y1, y2);
     }
 
 /**********************************************************************************************************************\
